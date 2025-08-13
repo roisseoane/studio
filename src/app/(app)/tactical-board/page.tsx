@@ -161,15 +161,23 @@ export default function TacticalBoardPage() {
                 </div>
             </div>
 
-            <div className="md:hidden fixed bottom-20 left-1/2 -translate-x-1/2 z-50">
-                 <Button 
-                    onClick={() => setIsCarouselVisible(!isCarouselVisible)} 
-                    variant="default"
-                    size="icon" 
-                    className="rounded-full w-14 h-14 bg-accent text-accent-foreground shadow-lg"
-                 >
-                    <User className="h-7 w-7" />
-                </Button>
+            <div className="md:hidden fixed bottom-20 left-0 right-0 z-50 px-4 max-w-sm mx-auto">
+                 <div className="flex items-center" style={{ justifyContent: 'space-around' }}>
+                    <div className="w-12 h-12 flex items-center justify-center">
+                        <Button
+                            onClick={() => setIsCarouselVisible(!isCarouselVisible)}
+                            variant="default"
+                            size="icon"
+                            className="rounded-full w-14 h-14 bg-accent text-accent-foreground shadow-lg"
+                        >
+                            <User className="h-7 w-7" />
+                        </Button>
+                    </div>
+                    <div className="w-12 h-12" />
+                    <div className="w-12 h-12" />
+                    <div className="w-12 h-12" />
+                    <div className="w-12 h-12" />
+                 </div>
             </div>
 
             <div className={cn(
