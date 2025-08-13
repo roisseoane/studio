@@ -150,8 +150,8 @@ export default function TacticalBoardPage() {
   const assigned = assignPlayers();
 
   return (
-    <div className="flex flex-col md:flex-row h-full bg-card">
-      <div className="flex-grow relative order-2 md:order-1">
+    <div className="flex flex-col h-full bg-card">
+      <div className="flex-grow relative">
         <FutsalField />
         <div className="absolute inset-0">
           <PositionCard position={positions.POR} titular={assigned.POR.titular} suplentes={assigned.POR.suplentes} />
@@ -163,40 +163,14 @@ export default function TacticalBoardPage() {
         <Button className="absolute top-4 right-4">Pizarra Táctica</Button>
       </div>
 
-      <div className="order-1 md:order-2 md:w-80 p-4 border-b md:border-l">
-        <Card>
-          <CardHeader>
-            <h2 className="text-lg font-bold">Jugadores Convocados</h2>
-          </CardHeader>
-          <CardContent>
-            <ScrollArea className="h-48 md:h-[calc(100vh-200px)]">
-              <div className="flex flex-row md:flex-col gap-4 flex-wrap">
-                {players.map((player) => (
-                  <div key={player.id} className="flex items-center space-x-2">
-                    <p
-                      className={cn(
-                        "text-sm font-medium leading-none",
-                        !selectedPlayers[player.id] && "opacity-50"
-                      )}
-                    >
-                      {player.name}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </ScrollArea>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="md:hidden order-3 p-4 bg-background/70 backdrop-blur-xl">
+      <div className="p-4 bg-background/70 backdrop-blur-xl">
         <Carousel opts={{
             dragFree: true,
             align: "start",
         }} className="w-full">
             <CarouselContent className="-ml-2">
                 {players.map((player) => (
-                    <CarouselItem key={player.id} className="basis-1/4 pl-2">
+                    <CarouselItem key={player.id} className="basis-1/4 sm:basis-1/5 md:basis-1/6 lg:basis-1/8 xl:basis-1/10 pl-2">
                         <PlayerChip
                         id={player.id}
                         name={player.name}
