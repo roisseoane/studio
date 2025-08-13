@@ -15,7 +15,7 @@ export function TacticalSidebar() {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <div className="absolute top-[10px] left-[10px] z-40 flex flex-row items-center">
+        <div className="absolute top-[-70px] left-[10px] z-40 flex flex-row items-center">
              <Button
                 variant="ghost"
                 size="icon"
