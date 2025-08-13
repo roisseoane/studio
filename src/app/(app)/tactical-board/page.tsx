@@ -7,6 +7,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const players = [
   { id: 1, name: "Juan", position: "POR" },
@@ -58,33 +60,41 @@ const FutsalField = () => (
   </div>
 );
 
-const PlayerChip = ({ name, isSelected, onToggle }) => (
-  <div
-    onClick={onToggle}
-    className={cn(
-      "rounded-full px-4 py-2 text-white cursor-pointer transition-colors",
-      isSelected ? "bg-[#00aaff] border-[#00aaff]" : "bg-gray-500/50"
-    )}
-  >
-    {name}
-  </div>
-);
+const PlayerChip = ({ name, isSelected, onToggle, id }) => (
+    <div
+      onClick={onToggle}
+      className={cn(
+        "flex flex-col items-center gap-2 cursor-pointer transition-all",
+        !isSelected && "opacity-50"
+      )}
+    >
+      <Avatar className={cn("h-16 w-16 border-4", isSelected ? "border-[#00aaff]" : "border-transparent")}>
+        <AvatarImage data-ai-hint="profile picture" src={`https://placehold.co/80x80.png?text=${name.charAt(0)}`} alt={name} />
+        <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+      </Avatar>
+      <span className="font-medium text-white">{name}</span>
+    </div>
+  );
 
 const PositionCard = ({ position, titular, suplentes }) => {
+  if (!titular) return null;
+
   return (
     <div
-      className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1"
+      className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-0.5"
       style={{ top: position.top, left: position.left }}
     >
-      <div className="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+      <div className="bg-blue-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
         {position.name}
       </div>
-      <div className="bg-white text-black text-sm font-semibold px-4 py-1.5 rounded-full shadow-md min-w-[100px] text-center">
-        {titular || "Vacante"}
+      <div className="bg-white text-black text-xs font-medium px-2 py-1 rounded-full shadow-md min-w-[50px] text-center">
+        {titular}
       </div>
-      <div className="bg-gray-800 text-white text-xs px-3 py-1 rounded-full shadow-md min-w-[120px] text-center truncate">
-        {suplentes.length > 0 ? suplentes.join(', ') : 'Sin suplentes'}
-      </div>
+      {suplentes.length > 0 && (
+        <div className="bg-gray-800 text-white text-[10px] px-1.5 py-0.5 rounded-full shadow-md min-w-[60px] text-center truncate">
+          {suplentes.join(', ')}
+        </div>
+      )}
     </div>
   );
 };
@@ -185,18 +195,23 @@ export default function TacticalBoardPage() {
       </div>
 
       <div className="md:hidden order-3 p-4 bg-background/70 backdrop-blur-xl">
-        <ScrollArea className="w-full whitespace-nowrap">
-            <div className="flex gap-2 pb-4">
-            {players.map((player) => (
-                <PlayerChip
-                key={player.id}
-                name={player.name}
-                isSelected={selectedPlayers[player.id]}
-                onToggle={() => togglePlayer(player.id)}
-                />
-            ))}
-            </div>
-        </ScrollArea>
+        <Carousel opts={{
+            dragFree: true,
+            align: "start",
+        }} className="w-full">
+            <CarouselContent className="-ml-2">
+                {players.map((player) => (
+                    <CarouselItem key={player.id} className="basis-1/4 pl-2">
+                        <PlayerChip
+                        id={player.id}
+                        name={player.name}
+                        isSelected={selectedPlayers[player.id]}
+                        onToggle={() => togglePlayer(player.id)}
+                        />
+                    </CarouselItem>
+                ))}
+            </CarouselContent>
+        </Carousel>
       </div>
     </div>
   );
