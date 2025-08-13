@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
@@ -175,17 +173,14 @@ export default function TacticalBoardPage() {
               <div className="flex flex-row md:flex-col gap-4 flex-wrap">
                 {players.map((player) => (
                   <div key={player.id} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`player-${player.id}`}
-                      checked={selectedPlayers[player.id]}
-                      onCheckedChange={() => togglePlayer(player.id)}
-                    />
-                    <Label
-                      htmlFor={`player-${player.id}`}
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    <p
+                      className={cn(
+                        "text-sm font-medium leading-none",
+                        !selectedPlayers[player.id] && "opacity-50"
+                      )}
                     >
                       {player.name}
-                    </Label>
+                    </p>
                   </div>
                 ))}
               </div>
