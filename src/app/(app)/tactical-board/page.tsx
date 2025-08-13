@@ -32,7 +32,7 @@ const positions = {
 };
 
 const FutsalField = () => (
-  <div className="relative w-full h-full" style={{ backgroundColor: "#a0c4ff" }}>
+  <div className="relative w-full h-full bg-transparent">
     <svg
       className="absolute inset-0 w-full h-full"
       viewBox="0 0 400 600"
@@ -151,16 +151,20 @@ export default function TacticalBoardPage() {
 
   return (
     <div className="flex flex-col h-full bg-card">
-      <div className="flex-grow relative">
-        <FutsalField />
-        <div className="absolute inset-0">
-          <PositionCard position={positions.POR} titular={assigned.POR.titular} suplentes={assigned.POR.suplentes} />
-          <PositionCard position={positions.CIE} titular={assigned.CIE.titular} suplentes={assigned.CIE.suplentes} />
-          <PositionCard position={positions["ALA-I"]} titular={assigned.ALA.titular[0]} suplentes={assigned.ALA.suplentes} />
-          <PositionCard position={positions["ALA-D"]} titular={assigned.ALA.titular[1]} suplentes={[]} />
-          <PositionCard position={positions.PIV} titular={assigned.PIV.titular} suplentes={assigned.PIV.suplentes} />
+      <div className="flex-grow relative flex items-center justify-center p-4">
+        <div className="w-full max-w-[400px] aspect-[2/3] bg-[#2c3e50] rounded-lg shadow-2xl p-2">
+            <div className="relative w-full h-full">
+                <FutsalField />
+                <div className="absolute inset-0">
+                  <PositionCard position={positions.POR} titular={assigned.POR.titular} suplentes={assigned.POR.suplentes} />
+                  <PositionCard position={positions.CIE} titular={assigned.CIE.titular} suplentes={assigned.CIE.suplentes} />
+                  <PositionCard position={positions["ALA-I"]} titular={assigned.ALA.titular[0]} suplentes={assigned.ALA.suplentes} />
+                  <PositionCard position={positions["ALA-D"]} titular={assigned.ALA.titular[1]} suplentes={[]} />
+                  <PositionCard position={positions.PIV} titular={assigned.PIV.titular} suplentes={assigned.PIV.suplentes} />
+                </div>
+                <Button className="absolute top-2 right-2">Pizarra Táctica</Button>
+            </div>
         </div>
-        <Button className="absolute top-4 right-4">Pizarra Táctica</Button>
       </div>
 
       <div className="p-4 bg-background/70 backdrop-blur-xl">
