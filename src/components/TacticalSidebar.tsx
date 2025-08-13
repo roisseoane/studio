@@ -40,8 +40,7 @@ export function TacticalSidebar() {
                 size="icon"
                 onClick={() => setIsExpanded(!isExpanded)}
                 className={cn(
-                    "w-12 h-12 rounded-full text-muted-foreground hover:bg-muted/50",
-                    isExpanded ? "bg-background/70 backdrop-blur-xl border border-border/50 shadow-lg" : "bg-transparent border-none shadow-none"
+                    "w-12 h-12 rounded-full text-muted-foreground hover:bg-muted/50 bg-background/70 backdrop-blur-xl border border-border/50 shadow-lg"
                 )}
             >
                 <Menu className="h-6 w-6" />
