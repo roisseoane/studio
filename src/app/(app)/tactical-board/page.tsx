@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User } from "lucide-react";
+import { TacticalSidebar } from "@/components/TacticalSidebar";
+
 
 const players = [
   { id: 1, name: "Juan", position: "POR" },
@@ -59,7 +59,7 @@ const PlayerChip = ({ name, isSelected, onToggle, id }) => (
             !isSelected && "opacity-50"
         )}
     >
-        <Avatar className={cn("h-16 w-16 border-4", isSelected ? "border-[#00aaff]" : "border-transparent")}>
+        <Avatar className={cn("h-16 w-16 border-4", isSelected ? "border-primary" : "border-transparent")}>
             <AvatarImage data-ai-hint="profile picture" src={`https://placehold.co/80x80.png?text=${name.charAt(0)}`} alt={name} />
             <AvatarFallback>{name.charAt(0)}</AvatarFallback>
         </Avatar>
@@ -95,11 +95,6 @@ export default function TacticalBoardPage() {
     const [selectedPlayers, setSelectedPlayers] = useState(
         players.reduce((acc, player) => ({ ...acc, [player.id]: true }), {})
     );
-    const [isCarouselVisible, setIsCarouselVisible] = useState(false);
-
-    const togglePlayer = (playerId) => {
-        setSelectedPlayers((prev) => ({ ...prev, [playerId]: !prev[playerId] }));
-    };
 
     const availablePlayers = players.filter((p) => selectedPlayers[p.id]);
 
@@ -146,63 +141,16 @@ export default function TacticalBoardPage() {
     return (
         <div className="flex flex-col h-full bg-card overflow-hidden">
             <div className="flex-grow relative flex items-center justify-center p-4">
-                <div className="w-full max-w-[400px] aspect-[2/3] bg-blue-900 rounded-lg shadow-2xl p-2">
-                    <div className="relative w-full h-full">
-                        <FutsalField />
-                        <div className="absolute inset-0">
-                            <PositionCard position={positions.POR} titular={assigned.POR.titular} suplentes={assigned.POR.suplentes} />
-                            <PositionCard position={positions.CIE} titular={assigned.CIE.titular} suplentes={assigned.CIE.suplentes} />
-                            <PositionCard position={positions["ALA-I"]} titular={assigned.ALA.titular[0]} suplentes={assigned.ALA.suplentes} />
-                            <PositionCard position={positions["ALA-D"]} titular={assigned.ALA.titular[1]} suplentes={[]} />
-                            <PositionCard position={positions.PIV} titular={assigned.PIV.titular} suplentes={assigned.PIV.suplentes} />
-                        </div>
-                        <Button className="absolute top-2 right-2">Pizarra Táctica</Button>
+                <div className="w-full max-w-[400px] aspect-[2/3] bg-blue-900 rounded-lg shadow-2xl p-2 relative">
+                    <FutsalField />
+                    <div className="absolute inset-0">
+                        <PositionCard position={positions.POR} titular={assigned.POR.titular} suplentes={assigned.POR.suplentes} />
+                        <PositionCard position={positions.CIE} titular={assigned.CIE.titular} suplentes={assigned.CIE.suplentes} />
+                        <PositionCard position={positions["ALA-I"]} titular={assigned.ALA.titular[0]} suplentes={assigned.ALA.suplentes} />
+                        <PositionCard position={positions["ALA-D"]} titular={assigned.ALA.titular[1]} suplentes={[]} />
+                        <PositionCard position={positions.PIV} titular={assigned.PIV.titular} suplentes={assigned.PIV.suplentes} />
                     </div>
-                </div>
-            </div>
-
-            <div className="md:hidden fixed bottom-20 left-0 right-0 z-50 px-4 max-w-sm mx-auto">
-                 <div className="flex items-center" style={{ justifyContent: 'space-around' }}>
-                    <div className="w-12 h-12 flex items-center justify-center">
-                        <Button
-                            onClick={() => setIsCarouselVisible(!isCarouselVisible)}
-                            variant="default"
-                            size="icon"
-                            className="rounded-full w-14 h-14 bg-accent text-accent-foreground shadow-lg"
-                        >
-                            <User className="h-7 w-7" />
-                        </Button>
-                    </div>
-                    <div className="w-12 h-12" />
-                    <div className="w-12 h-12" />
-                    <div className="w-12 h-12" />
-                    <div className="w-12 h-12" />
-                 </div>
-            </div>
-
-            <div className={cn(
-                "fixed bottom-0 left-0 right-0 bg-background/70 backdrop-blur-xl transition-transform duration-500 ease-in-out md:relative md:bg-transparent md:backdrop-blur-none",
-                "md:translate-x-0",
-                isCarouselVisible ? "translate-y-0" : "translate-y-full"
-            )}>
-                <div className="p-4 pb-20 md:pb-4">
-                    <Carousel opts={{
-                        dragFree: true,
-                        align: "start",
-                    }} className="w-full">
-                        <CarouselContent className="-ml-2">
-                            {players.map((player) => (
-                                <CarouselItem key={player.id} className="basis-1/4 sm:basis-1/5 md:basis-auto md:pl-4">
-                                    <PlayerChip
-                                        id={player.id}
-                                        name={player.name}
-                                        isSelected={selectedPlayers[player.id]}
-                                        onToggle={() => togglePlayer(player.id)}
-                                    />
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-                    </Carousel>
+                    <TacticalSidebar />
                 </div>
             </div>
         </div>
