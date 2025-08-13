@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Users, BarChart3, Clapperboard, Settings } from "lucide-react";
+import { Users, BarChart3, Clapperboard, Settings, Trello } from "lucide-react";
 
 type NavItem = {
   title: string;
@@ -12,6 +12,11 @@ export const NAV_ITEMS: NavItem[] = [
     title: "Team",
     href: "/team",
     icon: Users,
+  },
+  {
+    title: "Tactical Board",
+    href: "/tactical-board",
+    icon: Trello,
   },
   {
     title: "Stats",
