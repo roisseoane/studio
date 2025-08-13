@@ -18,7 +18,7 @@ export function TacticalSidebar() {
         <div className="absolute bottom-4 right-4 z-40">
             <div
                 className={cn(
-                    "flex flex-col items-center gap-2 p-2 transition-all duration-300 ease-in-out",
+                    "flex flex-col-reverse items-center gap-2 p-2 transition-all duration-300 ease-in-out",
                     "bg-background/70 backdrop-blur-xl border border-border/50 shadow-lg rounded-full"
                 )}
             >
@@ -32,7 +32,7 @@ export function TacticalSidebar() {
                 </Button>
                 <div
                     className={cn(
-                        "flex flex-col items-center gap-2 transition-all duration-300 ease-in-out overflow-hidden",
+                        "flex flex-col-reverse items-center gap-2 transition-all duration-300 ease-in-out overflow-hidden",
                         isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                     )}
                 >

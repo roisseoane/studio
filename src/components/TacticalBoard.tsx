@@ -1,5 +1,7 @@
 "use client";
 
+import { TacticalSidebar } from "./TacticalSidebar";
+
 const positions = {
   POR: { top: "85%", left: "50%", name: "POR" },
   CIE: { top: "65%", left: "50%", name: "CIE" },
@@ -74,6 +76,7 @@ export function TacticalBoard({ assignments }: TacticalBoardProps) {
                 <PositionCard position={positions["ALA-D"]} titular={assignments.ALA.titular[1] || null} suplentes={[]} />
                 <PositionCard position={positions.PIV} titular={assignments.PIV.titular} suplentes={assignments.PIV.suplentes} />
             </div>
+            <TacticalSidebar />
         </div>
     );
 }
