@@ -161,24 +161,25 @@ export default function TacticalBoardPage() {
                 </div>
             </div>
 
-            <div className="flex justify-center items-center pb-4 md:pb-2">
+            <div className="flex justify-center items-center py-2">
                  <Button onClick={() => setIsCarouselVisible(!isCarouselVisible)} variant="ghost" size="icon" className="rounded-full bg-primary/20 hover:bg-primary/30 text-white">
                     <User className="h-6 w-6" />
                 </Button>
             </div>
 
             <div className={cn(
-                "fixed bottom-0 left-0 w-full p-4 bg-background/70 backdrop-blur-xl transition-transform duration-500 ease-in-out md:bottom-4",
-                isCarouselVisible ? "translate-y-0" : "translate-y-full"
+                "fixed bottom-0 left-0 w-full bg-background/70 backdrop-blur-xl transition-transform duration-500 ease-in-out md:bottom-auto md:relative",
+                isCarouselVisible ? "translate-x-0" : "-translate-x-full",
+                "md:bg-transparent md:backdrop-blur-none"
             )}>
-                <div className="pb-16 md:pb-0">
+                <div className="p-4 pb-20 md:pb-4">
                     <Carousel opts={{
                         dragFree: true,
                         align: "start",
                     }} className="w-full">
                         <CarouselContent className="-ml-2">
                             {players.map((player) => (
-                                <CarouselItem key={player.id} className="basis-1/4 sm:basis-1/5 md:basis-1/6 lg:basis-1/8 xl:basis-1/10 pl-2">
+                                <CarouselItem key={player.id} className="basis-1/4 sm:basis-1/5 md:basis-auto md:pl-4">
                                     <PlayerChip
                                         id={player.id}
                                         name={player.name}
