@@ -146,7 +146,7 @@ export default function TacticalBoardPage() {
     return (
         <div className="flex flex-col h-full bg-card overflow-hidden">
             <div className="flex-grow relative flex items-center justify-center p-4">
-                <div className="w-full max-w-[400px] aspect-[2/3] bg-[#2c3e50] rounded-lg shadow-2xl p-2">
+                <div className="w-full max-w-[400px] aspect-[2/3] bg-blue-900 rounded-lg shadow-2xl p-2">
                     <div className="relative w-full h-full">
                         <FutsalField />
                         <div className="absolute inset-0">
@@ -161,16 +161,21 @@ export default function TacticalBoardPage() {
                 </div>
             </div>
 
-            <div className="flex justify-center items-center py-2">
-                 <Button onClick={() => setIsCarouselVisible(!isCarouselVisible)} variant="ghost" size="icon" className="rounded-full bg-primary/20 hover:bg-primary/30 text-white">
-                    <User className="h-6 w-6" />
+            <div className="md:hidden fixed bottom-20 left-1/2 -translate-x-1/2 z-50">
+                 <Button 
+                    onClick={() => setIsCarouselVisible(!isCarouselVisible)} 
+                    variant="default"
+                    size="icon" 
+                    className="rounded-full w-14 h-14 bg-accent text-accent-foreground shadow-lg"
+                 >
+                    <User className="h-7 w-7" />
                 </Button>
             </div>
 
             <div className={cn(
-                "fixed bottom-0 left-0 w-full bg-background/70 backdrop-blur-xl transition-transform duration-500 ease-in-out md:bottom-auto md:relative",
-                isCarouselVisible ? "translate-x-0" : "-translate-x-full",
-                "md:bg-transparent md:backdrop-blur-none"
+                "fixed bottom-0 left-0 right-0 bg-background/70 backdrop-blur-xl transition-transform duration-500 ease-in-out md:relative md:bg-transparent md:backdrop-blur-none",
+                "md:translate-x-0",
+                isCarouselVisible ? "translate-y-0" : "translate-y-full"
             )}>
                 <div className="p-4 pb-20 md:pb-4">
                     <Carousel opts={{
