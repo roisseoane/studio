@@ -51,7 +51,7 @@ const FutsalField = () => (
     </div>
 );
 
-const PlayerChip = ({ name, isSelected, onToggle, id }) => (
+const PlayerChip = ({ name, isSelected, onToggle, id }: { name: string; isSelected: boolean; onToggle: () => void; id: number }) => (
     <div
         onClick={onToggle}
         className={cn(
@@ -67,7 +67,7 @@ const PlayerChip = ({ name, isSelected, onToggle, id }) => (
     </div>
 );
 
-const PositionCard = ({ position, titular, suplentes }) => {
+const PositionCard = ({ position, titular, suplentes }: { position: { top: string; left: string; name: string; }; titular: string | null; suplentes: string[] }) => {
     if (!titular) return null;
 
     return (
@@ -93,22 +93,22 @@ const PositionCard = ({ position, titular, suplentes }) => {
 
 export default function TacticalBoardPage() {
     const [selectedPlayers, setSelectedPlayers] = useState(
-        players.reduce((acc, player) => ({ ...acc, [player.id]: true }), {})
+        players.reduce((acc, player) => ({ ...acc, [player.id]: true }), {} as Record<number, boolean>)
     );
 
     const availablePlayers = players.filter((p) => selectedPlayers[p.id]);
 
     const assignPlayers = () => {
         const assignments = {
-            POR: { titular: null, suplentes: [] },
-            CIE: { titular: null, suplentes: [] },
-            ALA: { titular: [], suplentes: [] },
-            PIV: { titular: null, suplentes: [] },
+            POR: { titular: null as string | null, suplentes: [] as string[] },
+            CIE: { titular: null as string | null, suplentes: [] as string[] },
+            ALA: { titular: [] as string[], suplentes: [] as string[] },
+            PIV: { titular: null as string | null, suplentes: [] as string[] },
         };
 
         const unassigned = [...availablePlayers];
 
-        const assignByPosition = (pos) => {
+        const assignByPosition = (pos: string) => {
             for (let i = 0; i < unassigned.length; i++) {
                 if (unassigned[i].position === pos) {
                     const player = unassigned.splice(i, 1)[0];
@@ -121,8 +121,11 @@ export default function TacticalBoardPage() {
         assignments.POR.titular = assignByPosition("POR");
         assignments.CIE.titular = assignByPosition("CIE");
         assignments.PIV.titular = assignByPosition("PIV");
-        assignments.ALA.titular.push(assignByPosition("ALA"));
-        assignments.ALA.titular.push(assignByPosition("ALA"));
+        const ala1 = assignByPosition("ALA");
+        if (ala1) assignments.ALA.titular.push(ala1);
+        const ala2 = assignByPosition("ALA");
+        if(ala2) assignments.ALA.titular.push(ala2);
+
 
         unassigned.forEach(player => {
             switch (player.position) {
@@ -146,8 +149,8 @@ export default function TacticalBoardPage() {
                     <div className="absolute inset-0">
                         <PositionCard position={positions.POR} titular={assigned.POR.titular} suplentes={assigned.POR.suplentes} />
                         <PositionCard position={positions.CIE} titular={assigned.CIE.titular} suplentes={assigned.CIE.suplentes} />
-                        <PositionCard position={positions["ALA-I"]} titular={assigned.ALA.titular[0]} suplentes={assigned.ALA.suplentes} />
-                        <PositionCard position={positions["ALA-D"]} titular={assigned.ALA.titular[1]} suplentes={[]} />
+                        <PositionCard position={positions["ALA-I"]} titular={assigned.ALA.titular[0] || null} suplentes={assigned.ALA.suplentes} />
+                        <PositionCard position={positions["ALA-D"]} titular={assigned.ALA.titular[1] || null} suplentes={[]} />
                         <PositionCard position={positions.PIV} titular={assigned.PIV.titular} suplentes={assigned.PIV.suplentes} />
                     </div>
                 </div>
