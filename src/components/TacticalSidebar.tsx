@@ -15,7 +15,7 @@ export function TacticalSidebar() {
     const [isExpanded, setIsExpanded] = useState(true);
 
     return (
-        <div className="absolute top-1/2 right-4 -translate-y-1/2 z-40">
+        <div className="absolute top-1/2 right-8 -translate-y-1/2 z-40">
             <div
                 className={cn(
                     "flex flex-col items-center gap-2 p-2 transition-all duration-300 ease-in-out",

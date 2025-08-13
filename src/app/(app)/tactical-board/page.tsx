@@ -150,8 +150,8 @@ export default function TacticalBoardPage() {
                         <PositionCard position={positions["ALA-D"]} titular={assigned.ALA.titular[1]} suplentes={[]} />
                         <PositionCard position={positions.PIV} titular={assigned.PIV.titular} suplentes={assigned.PIV.suplentes} />
                     </div>
-                    <TacticalSidebar />
                 </div>
+                <TacticalSidebar />
             </div>
         </div>
     );
