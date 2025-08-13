@@ -15,13 +15,21 @@ export function TacticalSidebar() {
     const [isExpanded, setIsExpanded] = useState(true);
 
     return (
-        <div className="absolute top-1/2 right-8 -translate-y-1/2 z-40">
+        <div className="absolute bottom-4 right-4 z-40">
             <div
                 className={cn(
                     "flex flex-col items-center gap-2 p-2 transition-all duration-300 ease-in-out",
                     "bg-background/70 backdrop-blur-xl border border-border/50 shadow-lg rounded-full"
                 )}
             >
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="w-12 h-12 rounded-full text-muted-foreground hover:bg-muted/50"
+                >
+                    <Menu className="h-6 w-6" />
+                </Button>
                 <div
                     className={cn(
                         "flex flex-col items-center gap-2 transition-all duration-300 ease-in-out overflow-hidden",
@@ -39,14 +47,6 @@ export function TacticalSidebar() {
                         </Button>
                     ))}
                 </div>
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setIsExpanded(!isExpanded)}
-                    className="w-12 h-12 rounded-full text-muted-foreground hover:bg-muted/50"
-                >
-                    <Menu className="h-6 w-6" />
-                </Button>
             </div>
         </div>
     );
