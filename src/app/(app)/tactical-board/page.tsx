@@ -70,7 +70,7 @@ export default function TacticalBoardPage() {
     const assigned = assignPlayers();
 
     return (
-        <div className="flex flex-col h-full bg-card overflow-hidden">
+        <div className="flex flex-col h-full overflow-hidden">
             <div className="flex-grow relative flex items-center justify-center p-4">
                 <TacticalBoard assignments={assigned} />
             </div>

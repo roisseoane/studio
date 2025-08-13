@@ -67,7 +67,7 @@ interface TacticalBoardProps {
 
 export function TacticalBoard({ assignments }: TacticalBoardProps) {
     return (
-        <div className="w-full max-w-[400px] aspect-[2/3] bg-blue-900 rounded-lg shadow-2xl p-2 relative">
+        <div className="w-full max-w-[400px] aspect-[2/3] rounded-lg shadow-2xl p-2 relative">
             <FutsalFieldSvg />
             <div className="absolute inset-0">
                 <PositionCard position={positions.POR} titular={assignments.POR.titular} suplentes={assignments.POR.suplentes} />
