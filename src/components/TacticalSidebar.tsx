@@ -15,13 +15,13 @@ export function TacticalSidebar() {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <div className="absolute top-[-40px] left-[25px] z-40 flex flex-row items-center">
+        <div className="absolute top-[-80px] left-[25px] z-40 flex flex-row items-center">
              <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsExpanded(!isExpanded)}
                 className={cn(
-                    "w-12 h-12 rounded-full text-muted-foreground hover:bg-muted/50 bg-background/70 backdrop-blur-xl border border-border/50 shadow-lg"
+                    "w-12 h-12 rounded-full text-white hover:bg-muted/50 bg-black/50 backdrop-blur-[30px] border border-border/50 shadow-lg"
                 )}
             >
                 <Menu className="h-6 w-6" />
@@ -32,13 +32,13 @@ export function TacticalSidebar() {
                     isExpanded ? "max-w-96 opacity-100" : "max-w-0 opacity-0"
                 )}
             >
-                <div className="bg-background/70 backdrop-blur-xl border border-border/50 shadow-lg rounded-full p-2 flex flex-row gap-2">
+                <div className="bg-black/50 backdrop-blur-[30px] border border-border/50 shadow-lg rounded-full p-2 flex flex-row gap-2">
                     {TACTICAL_BUTTONS.map((item) => (
                         <Button
                             key={item.id}
                             variant="ghost"
                             size="icon"
-                            className="w-12 h-12 rounded-full text-muted-foreground hover:bg-muted/50"
+                            className="w-12 h-12 rounded-full text-white hover:bg-muted/50"
                         >
                             <item.icon className="h-6 w-6" />
                         </Button>
