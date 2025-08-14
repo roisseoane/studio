@@ -29,16 +29,18 @@ export function PlayerToolbar({ isVisible, players, onDragStart, onPlayerReturn 
   return (
     <div
       className={cn(
-        "absolute bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg z-20 transition-all duration-300 ease-in-out flex items-center",
+        "absolute bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg z-20 transition-all duration-300 ease-in-out",
+        // Horizontal (mobile)
         "bottom-0 w-full h-[70px] rounded-full",
-        "md:top-0 md:left-auto md:right-0 md:w-[60px] md:h-full md:flex-col md:rounded-lg",
+        // Vertical (desktop)
+        "md:top-0 md:left-auto md:right-0 md:w-[60px] md:h-full md:rounded-lg md:mt-0",
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      <ScrollArea className="w-full h-full">
-        <div className="flex md:flex-col items-center justify-center gap-4 h-full w-full px-4">
+      <ScrollArea className="w-full h-full flex items-center">
+        <div className="flex md:flex-col items-center justify-start md:justify-center gap-4 h-full w-max px-4 mx-auto">
             {players.map((player) => (
                 <div
                 key={player.id}
