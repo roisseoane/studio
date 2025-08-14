@@ -5,10 +5,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Menu, User, Shield, PenSquare, CircleDot, Play } from "lucide-react";
 
-const DEFAULT_BUTTONS = [
+const NORMAL_BUTTONS = [
     { id: "players", icon: User },
     { id: "formations", icon: Shield },
-    { id: "draw", icon: PenSquare },
 ];
 
 const DRAW_BUTTONS = [
@@ -22,14 +21,18 @@ interface TacticalSidebarProps {
     setMode: (mode: "default" | "draw") => void;
 }
 
-export function TacticalSidebar({ onAction, mode }: TacticalSidebarProps) {
+export function TacticalSidebar({ onAction, mode, setMode }: TacticalSidebarProps) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleButtonClick = (id: string) => {
-        onAction(id);
+        if (id === 'draw') {
+            setMode(mode === 'default' ? 'draw' : 'default');
+        } else {
+            onAction(id);
+        }
     };
 
-    const currentButtons = mode === 'draw' ? DRAW_BUTTONS : DEFAULT_BUTTONS.filter(b => b.id !== 'draw');
+    const currentButtons = mode === 'draw' ? DRAW_BUTTONS : NORMAL_BUTTONS;
 
     return (
         <div className="absolute top-[-35px] left-[23px] z-40 flex flex-row items-center">
@@ -41,7 +44,7 @@ export function TacticalSidebar({ onAction, mode }: TacticalSidebarProps) {
                     "w-12 h-12 rounded-full text-white hover:bg-muted/50 bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg"
                 )}
             >
-                {mode === 'default' ? <Menu className="h-6 w-6" /> : <PenSquare className="h-6 w-6" />}
+                <Menu className="h-6 w-6" />
             </Button>
             <div
                 className={cn(
@@ -61,16 +64,17 @@ export function TacticalSidebar({ onAction, mode }: TacticalSidebarProps) {
                             <item.icon className="h-6 w-6" />
                         </Button>
                     ))}
-                     {mode === 'default' && (
-                         <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleButtonClick('draw')}
-                            className="w-10 h-6 rounded-full text-white hover:bg-muted/50"
-                        >
-                            <PenSquare className="h-6 w-6" />
-                        </Button>
-                    )}
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleButtonClick('draw')}
+                        className={cn(
+                            "w-10 h-6 rounded-full text-white hover:bg-muted/50",
+                            mode === 'draw' && "bg-primary/50 text-primary-foreground"
+                        )}
+                    >
+                        <PenSquare className="h-6 w-6" />
+                    </Button>
                 </div>
             </div>
         </div>
