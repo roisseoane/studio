@@ -1,5 +1,5 @@
 "use client";
-import { ScrollArea } from "./ui/scroll-area";
+import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { Player, PlacedPlayer } from "@/app/(app)/tactical-board/page";
 
@@ -30,28 +30,31 @@ export function PlayerToolbar({ isVisible, players, onDragStart, onPlayerReturn 
     <div
       className={cn(
         "absolute bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg rounded-lg z-20 transition-all duration-300 ease-in-out flex items-center",
-        "bottom-0 left-0 w-full h-[60px] md:top-0 md:left-auto md:right-0 md:w-[60px] md:h-full md:flex-col",
-        "md:translate-x-[calc(100%+5px)]",
+        "bottom-0 left-0 right-0 w-full h-[70px]",
+        "md:top-0 md:left-auto md:right-0 md:w-[60px] md:h-full md:flex-col",
         "translate-y-[calc(100%+5px)] md:translate-y-0",
+        "md:translate-x-[calc(100%+5px)]",
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      <ScrollArea className="h-full w-full" orientation="horizontal">
-        <div className="flex md:flex-col items-center gap-4 p-2 h-full">
-          {players.map((player) => (
-            <div
-              key={player.id}
-              draggable
-              onDragStart={(e) => onDragStart(e, player)}
-              className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold cursor-grab active:cursor-grabbing flex-shrink-0"
-              title={player.name}
-            >
-              {player.name.substring(0, 1)}
-            </div>
-          ))}
+      <ScrollArea className="w-full h-full p-2">
+        <div className="flex md:flex-col items-center gap-4 h-full">
+            {players.map((player) => (
+                <div
+                key={player.id}
+                draggable
+                onDragStart={(e) => onDragStart(e, player)}
+                className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold cursor-grab active:cursor-grabbing flex-shrink-0"
+                title={player.name}
+                >
+                {player.name.substring(0, 1)}
+                </div>
+            ))}
         </div>
+        <ScrollBar orientation="horizontal" className="md:hidden" />
+        <ScrollBar orientation="vertical" className="hidden md:flex" />
       </ScrollArea>
     </div>
   );

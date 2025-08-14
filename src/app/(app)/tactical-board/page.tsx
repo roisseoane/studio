@@ -149,13 +149,13 @@ export default function TacticalBoardPage() {
     return (
         <div className="flex flex-col h-full overflow-hidden">
             <div className="flex-grow relative flex items-center justify-center p-4">
-                 <div className="w-full max-w-[400px] aspect-[2/3] rounded-lg shadow-2xl p-2 relative flex flex-col items-center">
+                 <div className="w-full max-w-[400px] aspect-[2/3] rounded-lg shadow-2xl relative flex flex-col items-center">
                     <TacticalSidebar 
                         onAction={handleSidebarAction} 
                         mode={sidebarMode} 
                         setMode={setSidebarMode}
                     />
-                    <div className="relative w-full h-full">
+                    <div className="relative w-full h-full flex flex-col gap-[5px]">
                         <div 
                             className="relative w-full h-full"
                             onDrop={handleDrop}
