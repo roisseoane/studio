@@ -29,20 +29,23 @@ export function PlayerToolbar({ isVisible, players, onDragStart, onPlayerReturn 
   return (
     <div
       className={cn(
-        "absolute top-0 right-0 h-full w-[60px] bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg rounded-lg z-20 transition-all duration-300 ease-in-out flex flex-col items-center py-4",
-        isVisible ? "opacity-100 translate-x-[calc(100%+20px)]" : "opacity-0 translate-x-[calc(100%+30px)] pointer-events-none"
+        "absolute bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg rounded-lg z-20 transition-all duration-300 ease-in-out flex items-center",
+        "bottom-0 left-0 w-full h-[60px] md:top-0 md:left-auto md:right-0 md:w-[60px] md:h-full md:flex-col",
+        "md:translate-x-[calc(100%+5px)]",
+        "translate-y-[calc(100%+5px)] md:translate-y-0",
+        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      <ScrollArea className="h-full w-full">
-        <div className="flex flex-col items-center gap-4 px-2">
+      <ScrollArea className="h-full w-full" orientation="horizontal">
+        <div className="flex md:flex-col items-center gap-4 p-2 h-full">
           {players.map((player) => (
             <div
               key={player.id}
               draggable
               onDragStart={(e) => onDragStart(e, player)}
-              className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold cursor-grab active:cursor-grabbing"
+              className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold cursor-grab active:cursor-grabbing flex-shrink-0"
               title={player.name}
             >
               {player.name.substring(0, 1)}

@@ -149,7 +149,7 @@ export default function TacticalBoardPage() {
     return (
         <div className="flex flex-col h-full overflow-hidden">
             <div className="flex-grow relative flex items-center justify-center p-4">
-                 <div className="w-full max-w-[400px] aspect-[2/3] rounded-lg shadow-2xl p-2 relative flex justify-center">
+                 <div className="w-full max-w-[400px] aspect-[2/3] rounded-lg shadow-2xl p-2 relative flex flex-col items-center">
                     <TacticalSidebar 
                         onAction={handleSidebarAction} 
                         mode={sidebarMode} 
@@ -174,13 +174,6 @@ export default function TacticalBoardPage() {
                             ))}
                         </div>
 
-                        <PlayerToolbar
-                            isVisible={sidebarMode === "draw"}
-                            players={toolbarPlayers}
-                            onDragStart={handleDragStart}
-                            onPlayerReturn={handleReturnPlayer}
-                        />
-
                         <PlayersPanel
                             isOpen={isPlayersPanelOpen}
                             players={players}
@@ -188,6 +181,12 @@ export default function TacticalBoardPage() {
                             onTogglePlayer={handleTogglePlayer}
                         />
                     </div>
+                     <PlayerToolbar
+                        isVisible={sidebarMode === "draw"}
+                        players={toolbarPlayers}
+                        onDragStart={handleDragStart}
+                        onPlayerReturn={handleReturnPlayer}
+                    />
                 </div>
             </div>
         </div>
