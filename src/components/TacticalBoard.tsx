@@ -62,24 +62,26 @@ interface TacticalBoardAssignments {
 }
 
 interface TacticalBoardProps {
-    assignments: TacticalBoardAssignments;
+    assignments?: TacticalBoardAssignments;
     isBlurred?: boolean;
 }
 
 export function TacticalBoard({ assignments, isBlurred = false }: TacticalBoardProps) {
     return (
         <div className={cn(
-            "w-full h-full transition-all duration-500",
+            "w-full h-full transition-all duration-500 absolute inset-0",
             isBlurred && "blur-lg brightness-50"
         )}>
             <FutsalFieldSvg />
-            <div className="absolute inset-0">
-                <PositionCard position={positions.POR} titular={assignments.POR.titular} suplentes={assignments.POR.suplentes} />
-                <PositionCard position={positions.CIE} titular={assignments.CIE.titular} suplentes={assignments.CIE.suplentes} />
-                <PositionCard position={positions["ALA-I"]} titular={assignments.ALA.titular[0] || null} suplentes={assignments.ALA.suplentes} />
-                <PositionCard position={positions["ALA-D"]} titular={assignments.ALA.titular[1] || null} suplentes={[]} />
-                <PositionCard position={positions.PIV} titular={assignments.PIV.titular} suplentes={assignments.PIV.suplentes} />
-            </div>
+            {assignments && (
+                <div className="absolute inset-0">
+                    <PositionCard position={positions.POR} titular={assignments.POR.titular} suplentes={assignments.POR.suplentes} />
+                    <PositionCard position={positions.CIE} titular={assignments.CIE.titular} suplentes={assignments.CIE.suplentes} />
+                    <PositionCard position={positions["ALA-I"]} titular={assignments.ALA.titular[0] || null} suplentes={assignments.ALA.suplentes} />
+                    <PositionCard position={positions["ALA-D"]} titular={assignments.ALA.titular[1] || null} suplentes={[]} />
+                    <PositionCard position={positions.PIV} titular={assignments.PIV.titular} suplentes={assignments.PIV.suplentes} />
+                </div>
+            )}
         </div>
     );
 }
