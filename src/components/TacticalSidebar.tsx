@@ -3,27 +3,33 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Menu, User, Shield, PenSquare } from "lucide-react";
+import { Menu, User, Shield, PenSquare, CircleDot, Play } from "lucide-react";
 
-const TACTICAL_BUTTONS = [
+const DEFAULT_BUTTONS = [
     { id: "players", icon: User },
     { id: "formations", icon: Shield },
     { id: "draw", icon: PenSquare },
 ];
 
+const DRAW_BUTTONS = [
+    { id: "record", icon: CircleDot },
+    { id: "play", icon: Play },
+];
+
 interface TacticalSidebarProps {
-    onPlayersClick: () => void;
+    onAction: (action: string) => void;
+    mode: "default" | "draw";
+    setMode: (mode: "default" | "draw") => void;
 }
 
-export function TacticalSidebar({ onPlayersClick }: TacticalSidebarProps) {
+export function TacticalSidebar({ onAction, mode }: TacticalSidebarProps) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleButtonClick = (id: string) => {
-        if (id === "players") {
-            onPlayersClick();
-        }
-        // Handle other button clicks if needed
+        onAction(id);
     };
+
+    const currentButtons = mode === 'draw' ? DRAW_BUTTONS : DEFAULT_BUTTONS.filter(b => b.id !== 'draw');
 
     return (
         <div className="absolute top-[-35px] left-[23px] z-40 flex flex-row items-center">
@@ -35,7 +41,7 @@ export function TacticalSidebar({ onPlayersClick }: TacticalSidebarProps) {
                     "w-12 h-12 rounded-full text-white hover:bg-muted/50 bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg"
                 )}
             >
-                <Menu className="h-6 w-6" />
+                {mode === 'default' ? <Menu className="h-6 w-6" /> : <PenSquare className="h-6 w-6" />}
             </Button>
             <div
                 className={cn(
@@ -44,7 +50,7 @@ export function TacticalSidebar({ onPlayersClick }: TacticalSidebarProps) {
                 )}
             >
                 <div className="bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg rounded-full p-2 flex flex-row gap-2">
-                    {TACTICAL_BUTTONS.map((item) => (
+                    {currentButtons.map((item) => (
                         <Button
                             key={item.id}
                             variant="ghost"
@@ -55,6 +61,16 @@ export function TacticalSidebar({ onPlayersClick }: TacticalSidebarProps) {
                             <item.icon className="h-6 w-6" />
                         </Button>
                     ))}
+                     {mode === 'default' && (
+                         <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleButtonClick('draw')}
+                            className="w-10 h-6 rounded-full text-white hover:bg-muted/50"
+                        >
+                            <PenSquare className="h-6 w-6" />
+                        </Button>
+                    )}
                 </div>
             </div>
         </div>

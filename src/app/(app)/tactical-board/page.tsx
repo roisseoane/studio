@@ -25,6 +25,7 @@ export default function TacticalBoardPage() {
         players.reduce((acc, player) => ({ ...acc, [player.id]: true }), {} as Record<number, boolean>)
     );
     const [isPlayersPanelOpen, setIsPlayersPanelOpen] = useState(false);
+    const [sidebarMode, setSidebarMode] = useState<"default" | "draw">("default");
 
     const handleTogglePlayer = (playerId: number) => {
         setSelectedPlayers(prev => ({ ...prev, [playerId]: !prev[playerId] }));
@@ -75,13 +76,37 @@ export default function TacticalBoardPage() {
         return assignments;
     };
 
+    const handleSidebarAction = (action: string) => {
+        switch (action) {
+            case "players":
+                handleTogglePlayersPanel();
+                break;
+            case "draw":
+                setSidebarMode("draw");
+                break;
+            case "formations":
+                 // TODO: Implement formations logic
+                break;
+            case "record":
+                 // TODO: Implement record logic
+                break;
+            case "play":
+                 // TODO: Implement play logic
+                break;
+        }
+    };
+    
     const assigned = assignPlayers();
 
     return (
         <div className="flex flex-col h-full overflow-hidden">
             <div className="flex-grow relative flex items-center justify-center p-4">
                  <div className="w-full max-w-[400px] aspect-[2/3] rounded-lg shadow-2xl p-2 relative">
-                    <TacticalSidebar onPlayersClick={handleTogglePlayersPanel} />
+                    <TacticalSidebar 
+                        onAction={handleSidebarAction} 
+                        mode={sidebarMode} 
+                        setMode={setSidebarMode}
+                    />
                     <TacticalBoard assignments={assigned} isBlurred={isPlayersPanelOpen} />
                     <PlayersPanel
                         isOpen={isPlayersPanelOpen}
