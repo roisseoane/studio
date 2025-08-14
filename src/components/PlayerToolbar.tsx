@@ -1,5 +1,5 @@
 "use client";
-import { ScrollArea, ScrollBar } from "./ui/scroll-area";
+import { ScrollArea } from "./ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { Player, PlacedPlayer } from "@/app/(app)/tactical-board/page";
 
@@ -53,8 +53,6 @@ export function PlayerToolbar({ isVisible, players, onDragStart, onPlayerReturn 
                 </div>
             ))}
         </div>
-        <ScrollBar orientation="horizontal" className="md:hidden" />
-        <ScrollBar orientation="vertical" className="hidden md:flex" />
       </ScrollArea>
     </div>
   );
