@@ -35,7 +35,7 @@ export function TacticalSidebar({ onAction, mode, setMode }: TacticalSidebarProp
     const currentButtons = mode === 'draw' ? DRAW_BUTTONS : NORMAL_BUTTONS;
 
     return (
-        <div className="absolute top-[-35px] left-[23px] z-40 flex flex-row items-center">
+        <div className="absolute top-[-45px] left-[15px] z-40 flex flex-row items-center">
              <Button
                 variant="ghost"
                 size="icon"

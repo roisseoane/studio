@@ -29,9 +29,9 @@ export function PlayerToolbar({ isVisible, players, onDragStart, onPlayerReturn 
   return (
     <div
       className={cn(
-        "absolute bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg rounded-lg z-20 transition-all duration-300 ease-in-out flex items-center",
-        "bottom-0 left-0 right-0 w-full h-[70px]",
-        "md:top-0 md:left-auto md:right-0 md:w-[60px] md:h-full md:flex-col",
+        "absolute bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg z-20 transition-all duration-300 ease-in-out flex items-center",
+        "bottom-0 left-0 right-0 w-full h-[70px] rounded-full",
+        "md:top-0 md:left-auto md:right-0 md:w-[60px] md:h-full md:flex-col md:rounded-lg",
         "translate-y-[calc(100%+5px)] md:translate-y-0",
         "md:translate-x-[calc(100%+5px)]",
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
