@@ -30,7 +30,7 @@ export function PlayerToolbar({ isVisible, players, onDragStart, onPlayerReturn 
     <div
       className={cn(
         "absolute bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg z-20 transition-all duration-300 ease-in-out flex items-center",
-        "bottom-0 left-0 right-0 w-full h-[70px] rounded-full",
+        "bottom-0 w-full h-[70px] rounded-full",
         "md:top-0 md:left-auto md:right-0 md:w-[60px] md:h-full md:flex-col md:rounded-lg",
         "translate-y-[calc(100%+5px)] md:translate-y-0",
         "md:translate-x-[calc(100%+5px)]",
@@ -39,8 +39,8 @@ export function PlayerToolbar({ isVisible, players, onDragStart, onPlayerReturn 
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      <ScrollArea className="w-full h-full p-2">
-        <div className="flex md:flex-col items-center gap-4 h-full">
+      <ScrollArea className="w-full h-full">
+        <div className="flex md:flex-col items-center justify-center gap-4 h-full w-full px-4">
             {players.map((player) => (
                 <div
                 key={player.id}
