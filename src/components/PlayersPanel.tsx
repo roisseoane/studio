@@ -14,25 +14,19 @@ interface Player {
 
 interface PlayersPanelProps {
     isOpen: boolean;
-    onClose: () => void;
     players: Player[];
     selectedPlayers: Record<number, boolean>;
     onTogglePlayer: (id: number) => void;
 }
 
-export function PlayersPanel({ isOpen, onClose, players, selectedPlayers, onTogglePlayer }: PlayersPanelProps) {
+export function PlayersPanel({ isOpen, players, selectedPlayers, onTogglePlayer }: PlayersPanelProps) {
     if (!isOpen) {
         return null;
     }
 
     return (
-        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/30 backdrop-blur-sm">
-            <div className="absolute top-4 right-4">
-                <Button variant="ghost" size="icon" onClick={onClose} className="text-white hover:text-primary">
-                    <X className="w-8 h-8" />
-                </Button>
-            </div>
-            <div className="grid grid-cols-4 gap-4 p-8">
+        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/30 backdrop-blur-sm rounded-lg">
+            <div className="grid grid-cols-4 gap-4 p-4">
                 {players.map((player, index) => (
                     <div
                         key={player.id}

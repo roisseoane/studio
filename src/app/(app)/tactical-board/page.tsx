@@ -30,6 +30,10 @@ export default function TacticalBoardPage() {
         setSelectedPlayers(prev => ({ ...prev, [playerId]: !prev[playerId] }));
     };
 
+    const handleTogglePlayersPanel = () => {
+        setIsPlayersPanelOpen(prev => !prev);
+    }
+
     const availablePlayers = players.filter((p) => selectedPlayers[p.id]);
 
     const assignPlayers = () => {
@@ -77,11 +81,10 @@ export default function TacticalBoardPage() {
         <div className="flex flex-col h-full overflow-hidden">
             <div className="flex-grow relative flex items-center justify-center p-4">
                  <div className="w-full max-w-[400px] aspect-[2/3] rounded-lg shadow-2xl p-2 relative">
-                    <TacticalSidebar onPlayersClick={() => setIsPlayersPanelOpen(true)} />
+                    <TacticalSidebar onPlayersClick={handleTogglePlayersPanel} />
                     <TacticalBoard assignments={assigned} isBlurred={isPlayersPanelOpen} />
                     <PlayersPanel
                         isOpen={isPlayersPanelOpen}
-                        onClose={() => setIsPlayersPanelOpen(false)}
                         players={players}
                         selectedPlayers={selectedPlayers}
                         onTogglePlayer={handleTogglePlayer}
