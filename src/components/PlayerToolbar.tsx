@@ -32,8 +32,6 @@ export function PlayerToolbar({ isVisible, players, onDragStart, onPlayerReturn 
         "absolute bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg z-20 transition-all duration-300 ease-in-out flex items-center",
         "bottom-0 w-full h-[70px] rounded-full",
         "md:top-0 md:left-auto md:right-0 md:w-[60px] md:h-full md:flex-col md:rounded-lg",
-        "translate-y-[calc(100%+5px)] md:translate-y-0",
-        "md:translate-x-[calc(100%+5px)]",
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       onDrop={handleDrop}
@@ -53,7 +51,7 @@ export function PlayerToolbar({ isVisible, players, onDragStart, onPlayerReturn 
                 </div>
             ))}
         </div>
-        <ScrollBar orientation="horizontal" className="md:hidden" />
+        <ScrollBar orientation="horizontal" className="hidden" />
         <ScrollBar orientation="vertical" className="hidden md:flex" />
       </ScrollArea>
     </div>
