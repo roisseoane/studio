@@ -1,6 +1,6 @@
 "use client";
 
-import { TacticalSidebar } from "./TacticalSidebar";
+import { cn } from "@/lib/utils";
 
 const positions = {
   POR: { top: "85%", left: "50%", name: "POR" },
@@ -63,11 +63,15 @@ interface TacticalBoardAssignments {
 
 interface TacticalBoardProps {
     assignments: TacticalBoardAssignments;
+    isBlurred?: boolean;
 }
 
-export function TacticalBoard({ assignments }: TacticalBoardProps) {
+export function TacticalBoard({ assignments, isBlurred = false }: TacticalBoardProps) {
     return (
-        <div className="w-full max-w-[400px] aspect-[2/3] rounded-lg shadow-2xl p-2 relative">
+        <div className={cn(
+            "w-full h-full transition-all duration-500",
+            isBlurred && "blur-lg brightness-50"
+        )}>
             <FutsalFieldSvg />
             <div className="absolute inset-0">
                 <PositionCard position={positions.POR} titular={assignments.POR.titular} suplentes={assignments.POR.suplentes} />
@@ -76,7 +80,6 @@ export function TacticalBoard({ assignments }: TacticalBoardProps) {
                 <PositionCard position={positions["ALA-D"]} titular={assignments.ALA.titular[1] || null} suplentes={[]} />
                 <PositionCard position={positions.PIV} titular={assignments.PIV.titular} suplentes={assignments.PIV.suplentes} />
             </div>
-            <TacticalSidebar />
         </div>
     );
 }

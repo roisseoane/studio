@@ -11,7 +11,7 @@ export function BottomNav() {
   return (
     <nav
       className="md:hidden fixed bottom-4 inset-x-4 max-w-sm mx-auto
-                 bg-black/[.25] backdrop-blur-[30px] border border-border/50 shadow-lg rounded-full z-50"
+                 bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg rounded-full z-50"
     >
       <div className="flex justify-around items-center p-2">
         {NAV_ITEMS.map((item) => {
