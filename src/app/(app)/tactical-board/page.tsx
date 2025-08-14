@@ -149,43 +149,45 @@ export default function TacticalBoardPage() {
     return (
         <div className="flex flex-col h-full overflow-hidden">
             <div className="flex-grow relative flex items-center justify-center p-4">
-                 <div className="w-full max-w-[400px] aspect-[2/3] rounded-lg shadow-2xl p-2 relative flex">
+                 <div className="w-full max-w-[400px] aspect-[2/3] rounded-lg shadow-2xl p-2 relative flex justify-center">
                     <TacticalSidebar 
                         onAction={handleSidebarAction} 
                         mode={sidebarMode} 
                         setMode={setSidebarMode}
                     />
-                    <div 
-                        className="relative w-full h-full"
-                        onDrop={handleDrop}
-                        onDragOver={handleDragOver}
-                    >
-                        <TacticalBoard 
-                            assignments={sidebarMode === 'default' ? assigned : undefined} 
-                            isBlurred={isPlayersPanelOpen}
-                        />
-                        {placedPlayers.map(player => (
-                            <DraggablePlayer
-                                key={player.id}
-                                player={player}
-                                onDragStart={(e) => handleDragStart(e, player)}
+                    <div className="relative w-full h-full">
+                        <div 
+                            className="relative w-full h-full"
+                            onDrop={handleDrop}
+                            onDragOver={handleDragOver}
+                        >
+                            <TacticalBoard 
+                                assignments={sidebarMode === 'default' ? assigned : undefined} 
+                                isBlurred={isPlayersPanelOpen}
                             />
-                        ))}
+                            {placedPlayers.map(player => (
+                                <DraggablePlayer
+                                    key={player.id}
+                                    player={player}
+                                    onDragStart={(e) => handleDragStart(e, player)}
+                                />
+                            ))}
+                        </div>
+
+                        <PlayerToolbar
+                            isVisible={sidebarMode === "draw"}
+                            players={toolbarPlayers}
+                            onDragStart={handleDragStart}
+                            onPlayerReturn={handleReturnPlayer}
+                        />
+
+                        <PlayersPanel
+                            isOpen={isPlayersPanelOpen}
+                            players={players}
+                            selectedPlayers={selectedPlayers}
+                            onTogglePlayer={handleTogglePlayer}
+                        />
                     </div>
-
-                    <PlayerToolbar
-                        isVisible={sidebarMode === "draw"}
-                        players={toolbarPlayers}
-                        onDragStart={handleDragStart}
-                        onPlayerReturn={handleReturnPlayer}
-                    />
-
-                    <PlayersPanel
-                        isOpen={isPlayersPanelOpen}
-                        players={players}
-                        selectedPlayers={selectedPlayers}
-                        onTogglePlayer={handleTogglePlayer}
-                    />
                 </div>
             </div>
         </div>
