@@ -29,18 +29,18 @@ export function PlayerToolbar({ isVisible, players, onDragStart, onPlayerReturn 
   return (
     <div
       className={cn(
-        "absolute bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg z-20 transition-all duration-300 ease-in-out",
+        "bg-white/5 backdrop-blur-[30px] border border-border/50 shadow-lg z-20 transition-all duration-300 ease-in-out w-full max-w-[400px]",
         // Horizontal (mobile)
-        "bottom-0 w-full h-[70px] rounded-full",
+        "h-[55px] rounded-full",
         // Vertical (desktop)
-        "md:top-0 md:left-auto md:right-0 md:w-[60px] md:h-full md:rounded-lg md:mt-0",
+        "md:absolute md:top-0 md:left-auto md:right-0 md:translate-x-full md:mr-[5px] md:w-[60px] md:h-full md:rounded-lg",
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      <ScrollArea className="w-full h-full flex items-center">
-        <div className="flex md:flex-col items-center justify-start md:justify-center gap-4 h-full w-max px-4 mx-auto">
+      <ScrollArea className="w-full h-full">
+        <div className="flex md:flex-col items-center justify-start md:justify-center gap-4 h-full w-max px-4 mx-auto md:w-full md:h-max md:py-4">
             {players.map((player) => (
                 <div
                 key={player.id}
@@ -53,7 +53,7 @@ export function PlayerToolbar({ isVisible, players, onDragStart, onPlayerReturn 
                 </div>
             ))}
         </div>
-        <ScrollBar orientation="horizontal" className="hidden" />
+        <ScrollBar orientation="horizontal" className="md:hidden" />
         <ScrollBar orientation="vertical" className="hidden md:flex" />
       </ScrollArea>
     </div>
