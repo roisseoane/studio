@@ -39,7 +39,7 @@ export function PlayerToolbar({ isVisible, players, onDragStart, onPlayerReturn 
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      <ScrollArea className="w-full h-full">
+      <ScrollArea className="w-full h-[41px]">
         <div className="flex md:flex-col justify-start md:justify-center gap-4 h-full w-max px-4 mx-auto md:w-full md:h-max md:py-4">
             {players.map((player) => (
                 <div
